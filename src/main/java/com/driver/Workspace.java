@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class Workspace extends Gmail{
 
-    private ArrayList<Meeting> calendar; // Stores all the meetings
+    private ArrayList<Meeting> calendar = new ArrayList<>(); // Stores all the meetings
 
     public Workspace(String emailId) {
         super(emailId, Integer.MAX_VALUE);

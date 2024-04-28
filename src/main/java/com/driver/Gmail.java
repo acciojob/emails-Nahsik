@@ -13,8 +13,8 @@ public class Gmail extends Email {
     int inboxCapacity; //maximum number of mails inbox can store
     //Inbox: Stores mails. Each mail has date (Date), sender (String), message (String). It is guaranteed that message is distinct for all mails.
     //Trash: Stores mails. Each mail has date (Date), sender (String), message (String)
-    List<Mail> inbox = new ArrayList<>();
-    List<Mail> trash = new ArrayList<>();
+    private List<Mail> inbox = new ArrayList<>();
+    private List<Mail> trash = new ArrayList<>();
 
     public Gmail(String emailId, int inboxCapacity) {
         super(emailId);
@@ -37,12 +37,16 @@ public class Gmail extends Email {
     public void deleteMail(String message) {
         // Each message is distinct
         // If the given message is found in any mail in the inbox, move the mail to trash, else do nothing
-        inbox.forEach(mail -> {
+        Mail deleteMail = null;
+        for (Mail mail : inbox) {
             if (StringUtils.equalsIgnoreCase(mail.getMessage(), message)) {
-                trash.add(mail);
-                inbox.remove(mail);
+                deleteMail = mail;
             }
-        });
+        }
+        if (null != deleteMail) {
+            trash.add(deleteMail);
+            inbox.remove(deleteMail);
+        }
     }
 
     public String findLatestMessage() {
