@@ -23,7 +23,16 @@ public class Workspace extends Gmail{
     }
 
     public int findMaxMeetings(){
-        return 5;
+        calendar.sort((m1, m2) -> m1.getEndTime().compareTo(m2.getEndTime()));
+        int count = 1;
+        LocalTime endTime = calendar.get(0).getEndTime();
+        for (int i = 1; i < calendar.size(); i++) {
+            if (calendar.get(i).getStartTime().compareTo(endTime) >= 0) {
+                count++;
+                endTime = calendar.get(i).getEndTime();
+            }
+        }
+        return count;
         // find the maximum number of meetings you can attend
         // 1. At a particular time, you can be present in at most one meeting
         // 2. If you want to attend a meeting, you must join it at its start time and leave at end time.
