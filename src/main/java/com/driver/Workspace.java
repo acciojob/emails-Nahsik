@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Workspace extends Gmail{
 
@@ -23,7 +24,7 @@ public class Workspace extends Gmail{
     }
 
     public int findMaxMeetings(){
-        calendar.sort((m1, m2) -> m1.getEndTime().compareTo(m2.getEndTime()));
+        calendar.sort(Comparator.comparing(Meeting::getEndTime));
         int count = 1;
         LocalTime endTime = calendar.get(0).getEndTime();
         for (int i = 1; i < calendar.size(); i++) {
