@@ -43,7 +43,7 @@ public class Email {
     // 5. It contains at least one special character. Any character apart from
     // alphabets and digits is a special character
     private boolean isValid(String oldPassword, String newPassword) {
-        boolean isValiad = !Objects.equals(this.password, oldPassword);
+        boolean isValiad = Objects.equals(this.password, oldPassword);
         isValiad = isValiad && (newPassword.length() >= 8);
 
         boolean uppercase = false;
